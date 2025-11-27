@@ -70,11 +70,13 @@ public class Main
                     "(Android)");
             tipo = scanner.nextInt();
 
+            modelo = scanner.nextLine();
             System.out.println("Modelo:\nI9\nBK-T681");
-            modelo = scanner.next();
+            modelo = scanner.nextLine();
+
 
             System.out.println("Conexão:\nUSB\nRS232 - COM2\nTCP/IP - 192.168.0.20\nBluetooth - AA:BB:CC:DD:EE:FF");
-            conexao = scanner.next();
+            conexao = scanner.nextLine();
 
             System.out.println("Parâmetro: (0 caso seja conexão USB)");
             parametro = scanner.nextInt();
@@ -104,19 +106,25 @@ public class Main
     // 3 Digitar um texto
     public static void impressaoTexto(){
         if(conexaoAberta) {
+
             System.out.println("Digite o que quer imprimir");
             String dados = scanner.nextLine();
+            System.out.println(dados);
 
             System.out.println("Digite a posição do texto, '0' Esquerda, '1' Centro, '2' Direita");
             int posicao = scanner.nextInt();
+            System.out.println(posicao);
 
             System.out.println("Digite o estilo do texto, '0' Fonte A, '1' Fonte B, '2' Sublinhado, '4' Modo Reverso, '8' Negrito ");
             int estilo = scanner.nextInt();
+            System.out.println(estilo);
 
             System.out.println("Digite o tamanho do texto,Altura:\n '0' para 1 x na altura\n'1' para 2 x na altura\n '2' para 3 x na altura\n '3' para 4 x na altura\n '4' para 5 x na altura\n '5' para 6 x na altura\n '6' para 7 x na altura\n '7' para 8 x na altura\n Largura:\n '16' para 2x na largura\n '32' para 3 x na largura\n '48' para 4 x na largura\n '64' para 5x na largura\n '80' para 6 x na largura\n '96' para 7 x na largura\n '112' para 8 x na largura ");
             int tamanho = scanner.nextInt();
+            System.out.println(tamanho);
 
-            int retorno = ImpressoraDLL.INSTANCE.ImpressaoTexto(dados, posicao, estilo, tamanho);
+
+            int retorno = ImpressoraDLL.INSTANCE.ImpressaoTexto(dados, posicao,4,0);
             if (retorno == 0) {
                 System.out.println("Imprimindo texto...");
             } else {
@@ -127,12 +135,12 @@ public class Main
     }
 
 
-    //4 out 
+    //4 out
     public static void imprimirQrcode(){
         if (conexaoAberta) {
 
             System.out.println("Insira os dados: ");
-            String dados = scanner.next();
+            String dados = scanner.nextLine();
 
             System.out.println("Tamanho: \n(Entre 1-6)");
             int tamanho = scanner.nextInt();
@@ -140,7 +148,7 @@ public class Main
             System.out.println("Nível de correção:\n(1) 7%\n(2) 15%\n(3) 25%\n(4) 30%");
             int nivelCorrecao = scanner.nextInt();
 
-            int retorno = ImpressoraDLL.INSTANCE.ImpressaoQRCode(dados, tamanho, nivelCorrecao);
+            int retorno = ImpressoraDLL.INSTANCE.ImpressaoQRCode(dados, 6,4);
             if (retorno == 0) {
                 System.out.println("Imprimindo QRCode...");
             } else {
@@ -297,15 +305,18 @@ public class Main
                     abrirConexao();
                     break;
                 case "3":
+
                     impressaoTexto();
-                    //ImpressoraDLL.INSTANCE.Corte(3);
+                    ImpressoraDLL.INSTANCE.Corte(6);
                     break;
 
                 case "4":
                     imprimirQrcode();
+                    ImpressoraDLL.INSTANCE.Corte(5);
                     break;
                 case "5":
                     ImpressaoCodigoBarras();
+                    ImpressoraDLL.INSTANCE.Corte(5);
                     break;
 
                 case "6":
@@ -316,6 +327,7 @@ public class Main
                 case "7":
                     ImprimeXMLCancelamentoSAT();
                     ImpressoraDLL.INSTANCE.Corte(3);
+                    break;
 
                 case "8":
                     AvancaPapel();
