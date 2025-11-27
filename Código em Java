@@ -73,7 +73,7 @@ public class Main
             System.out.println("Modelo:\nI9\nBK-T681");
             modelo = scanner.next();
 
-            System.out.println("Conexão:\nUSB - USB\nRS232 - COM2\nTCP/IP - 192.168.0.20\nBluetooth - AA:BB:CC:DD:EE:FF");
+            System.out.println("Conexão:\nUSB\nRS232 - COM2\nTCP/IP - 192.168.0.20\nBluetooth - AA:BB:CC:DD:EE:FF");
             conexao = scanner.next();
 
             System.out.println("Parâmetro: (0 caso seja conexão USB)");
